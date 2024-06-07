@@ -2,11 +2,16 @@
 import { useUserStore } from '~/store/user'
 
 const userStore = useUserStore()
+userStore.refresh()
 </script>
 
 <template>
   <div>
-    <p>{{ userStore.data.id }}</p>
+    <h1 class="text-center text-5xl font-bold">
+      Test
+    </h1>
+
+    <slot />
   </div>
 </template>
 

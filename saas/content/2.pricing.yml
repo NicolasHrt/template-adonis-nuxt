@@ -15,6 +15,7 @@ plans:
     button:
       label: Get Started
       color: white
+      to: '/app'
     features:
       - 1 GB Storage
       - 1 Email Account
@@ -33,6 +34,7 @@ plans:
     button:
       label: Get Started
       color: black
+      to: '/app'
     features:
       - 10 GB Storage
       - 10 Email Accounts
@@ -50,6 +52,7 @@ plans:
     button:
       label: Get Started
       color: white
+      to: '/app'
     features:
       - 100 GB Storage
       - 100 Email Accounts

@@ -3,7 +3,7 @@ import { defineConfig } from '@adonisjs/lucid'
 import env from '#start/env'
 
 const dbConfig = defineConfig({
-  connection: env.get('DB_CONNECTION', 'sqlite'),
+  connection: env.get('NODE_ENV') === 'production' ? 'pg' : 'sqlite',
   connections: {
     sqlite: {
       client: 'better-sqlite3',

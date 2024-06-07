@@ -5,24 +5,24 @@ export const useUserStore = defineStore({
   state: () => ({
     isLogged: false,
     data: {
+      id: null,
       username: null,
-      email: null
+      email: null,
+      createdAt: null,
+      updatedAt: null
     }
   }), actions: {
     async refresh() {
       const headers = useRequestHeaders(['cookie'])
-
-      try {
-        const { data: response } = await useFetch('http://localhost:3333/auth', {
-          headers, credentials: 'include'
-        })
-        this.data.username = response.value.username
-        this.data.email = response.value.email
-        this.isLogged = true
-        // eslint-disable-next-line no-unused-vars
-      } catch (e) {
+      const { data: response, status: status }: { data: any, status: any } = await useFetch('http://localhost:3333/auth', {
+        headers, credentials: 'include'
+      })
+      if (status.value === 'error') {
         this.isLogged = false
+        return
       }
+      this.data = response.value
+      this.isLogged = true
     },
 
     async logOut() {
@@ -32,20 +32,21 @@ export const useUserStore = defineStore({
       this.isLogged = false
     },
 
-    async signUp(user) {
+    async signUp(user: object) {
       await $fetch('http://localhost:3333/auth/sign-up', {
         method: 'POST', body: user, credentials: 'include' // Permet d'inclure les cookies dans la requête
       })
       await this.refresh()
     },
 
-    async signIn(email, password) {
+    async signIn(email: string, password: string, rememberMe: boolean) {
       await $fetch('http://localhost:3333/auth/sign-in',
         {
           method: 'POST', body:
             {
               email: email,
-              password: password
+              password: password,
+              remember_me: rememberMe
             }, credentials: 'include' // Permet d'inclure les cookies dans la requête
         })
       await this.refresh()

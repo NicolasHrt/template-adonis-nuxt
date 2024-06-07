@@ -17,7 +17,7 @@ export default class AuthController {
   async signIn({ request, response, auth }: HttpContext) {
     const { email, password } = await loginUserValidator.validate(request.all())
     const user = await User.verifyCredentials(email, password)
-    await auth.use('web').login(user)
+    await auth.use('web').login(user, !!request.input('remember_me'))
     return response.status(201).json({ message: 'User logged in' })
   }
 

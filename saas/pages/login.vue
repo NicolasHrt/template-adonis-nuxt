@@ -15,6 +15,8 @@ const state = reactive({
   password: undefined
 })
 
+const rememberMe = ref(false)
+
 const form = ref()
 const error = ref('')
 
@@ -22,17 +24,18 @@ async function onSubmit() {
   form.value.clear()
   error.value = ''
   try {
-    await userStore.signIn(state.email, state.password)
+    // Sign in
+    await userStore.signIn(state.email, state.password, rememberMe.value)
     await navigateTo('/app')
   } catch (err: any) {
-    console.log(err.response)
     if (err.response && err.response.status === 422) {
+      // Apply validation
       form.value.setErrors(err.response._data.errors.map((err: any) => ({
         message: err.message,
         path: err.field
       })))
     } else {
-      console.log(err.response)
+      // Invalid credentials
       error.value = err.response._data.errors[0].message
     }
   }
@@ -75,6 +78,12 @@ async function onSubmit() {
           type="password"
         />
       </UFormGroup>
+      <UCheckbox
+        v-model="rememberMe"
+        name="rememberMe"
+        label="Remember me"
+      />
+
       <UAlert
         v-if="error"
         color="red"
@@ -89,7 +98,7 @@ async function onSubmit() {
         Continue
       </UButton>
     </UForm>
-    <p class="text-sm text-gray-500 dark:text-gray-400 mt-6 text-center"> By signing up, you agree to our
+    <p class="text-sm text-gray-500 dark:text-gray-400 mt-6 text-center">By signing up, you agree to our
       <NuxtLink
         to="/"
         class="text-primary font-medium"

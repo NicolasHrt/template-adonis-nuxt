@@ -3,6 +3,7 @@ import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
 import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
+import { DbRememberMeTokensProvider } from '@adonisjs/auth/session'
 
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import Post from '#models/post'
@@ -24,6 +25,8 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column({ serializeAs: null })
   declare password: string
+
+  static rememberMeTokens = DbRememberMeTokensProvider.forModel(User)
 
   @hasMany(() => Post)
   declare posts: HasMany<typeof Post>

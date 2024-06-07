@@ -8,11 +8,11 @@ useHead({
 })
 
 const userStore = useUserStore()
-const router = useRouter()
+userStore.refresh()
 
-watchEffect(() => {
+watchEffect(async () => {
   if (userStore.isLogged) {
-    router.push('/app')
+    await navigateTo('/app')
   }
 })
 </script>
@@ -20,7 +20,6 @@ watchEffect(() => {
 <template>
   <div class="h-screen flex items-center justify-center overlay">
     <div class="gradient" />
-
     <UButton
       icon="i-heroicons-home"
       label="Home"
