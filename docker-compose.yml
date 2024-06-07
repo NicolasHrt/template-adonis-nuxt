@@ -1,0 +1,18 @@
+services:
+  nuxt:
+    build:
+      context: ./nuxt-app  # Chemin vers le répertoire contenant le Dockerfile de Nuxt.js
+    container_name: nuxt_app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - adonis
+
+  adonis:
+    build:
+      context: ./my-adonisjs-app  # Chemin vers le répertoire contenant le Dockerfile d'Adonis.js
+    container_name: adonis_app
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./my-adonisjs-app/.env.prod
