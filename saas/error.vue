@@ -28,7 +28,7 @@ provide('navigation', navigation)
 
 <template>
   <div>
-    <AppHeader />
+    <LandingHeader />
 
     <UMain>
       <UContainer>
@@ -38,7 +38,7 @@ provide('navigation', navigation)
       </UContainer>
     </UMain>
 
-    <AppFooter />
+    <LandingFooter />
 
     <ClientOnly>
       <LazyUContentSearch

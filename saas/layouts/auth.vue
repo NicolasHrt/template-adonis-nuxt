@@ -1,7 +1,18 @@
 <script setup lang="ts">
+import { useUserStore } from '~/store/user'
+
 useHead({
   bodyAttrs: {
     class: 'dark:bg-gray-950'
+  }
+})
+
+const userStore = useUserStore()
+const router = useRouter()
+
+watchEffect(() => {
+  if (userStore.isLogged) {
+    router.push('/app')
   }
 })
 </script>

@@ -32,10 +32,22 @@ export const useUserStore = defineStore({
       this.isLogged = false
     },
 
-    async register(user) {
+    async signUp(user) {
       await $fetch('http://localhost:3333/auth/sign-up', {
         method: 'POST', body: user, credentials: 'include' // Permet d'inclure les cookies dans la requête
       })
+      await this.refresh()
+    },
+
+    async signIn(email, password) {
+      await $fetch('http://localhost:3333/auth/sign-in',
+        {
+          method: 'POST', body:
+            {
+              email: email,
+              password: password
+            }, credentials: 'include' // Permet d'inclure les cookies dans la requête
+        })
       await this.refresh()
     }
 

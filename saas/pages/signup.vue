@@ -21,8 +21,7 @@ const form = ref()
 async function onSubmit() {
   form.value.clear()
   try {
-    await userStore.register(state)
-
+    await userStore.signUp(state)
     await navigateTo('/app')
   } catch (err: any) {
     console.log(err.response)
