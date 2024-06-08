@@ -30,6 +30,7 @@ export const useUserStore = defineStore({
         method: 'POST', credentials: 'include'
       })
       this.isLogged = false
+      await navigateTo('/')
     },
 
     async signUp(user: object) {
@@ -50,7 +51,14 @@ export const useUserStore = defineStore({
             }, credentials: 'include' // Permet d'inclure les cookies dans la requête
         })
       await this.refresh()
-    }
+    },
 
+    async deleteUser() {
+      await $fetch('http://localhost:3333/auth/delete', {
+        method: 'DELETE', credentials: 'include'
+      })
+      this.isLogged = false
+      await navigateTo('/')
+    }
   }
 })

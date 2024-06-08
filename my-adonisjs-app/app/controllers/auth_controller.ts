@@ -25,4 +25,10 @@ export default class AuthController {
     await auth.use('web').logout()
     return response.status(201).json({ message: 'User logged out' })
   }
+
+  async deleteUser({ response, auth }: HttpContext) {
+    const user = auth.user
+    await user!.delete()
+    return response.status(201).json({ message: 'User deleted' })
+  }
 }

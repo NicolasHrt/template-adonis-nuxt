@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from '~/store/user'
+import AppHeader from '~/components/AppHeader.vue'
 
 const userStore = useUserStore()
 userStore.refresh()
@@ -7,11 +8,12 @@ userStore.refresh()
 
 <template>
   <div>
-    <h1 class="text-center text-5xl font-bold">
-      Test
-    </h1>
-
-    <slot />
+    <AppHeader class="mb-10" />
+    <UMain>
+      <UContainer>
+        <slot />
+      </UContainer>
+    </UMain>
   </div>
 </template>
 

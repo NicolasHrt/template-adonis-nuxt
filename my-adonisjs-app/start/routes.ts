@@ -28,6 +28,7 @@ router
     router.post('/sign-up', [AuthController, 'signUp'])
     router.post('/sign-in', [AuthController, 'signIn'])
     router.post('/sign-out', [AuthController, 'signOut'])
+    router.delete('/delete', [AuthController, 'deleteUser']).use(middleware.auth())
   })
   .prefix('auth')
 
