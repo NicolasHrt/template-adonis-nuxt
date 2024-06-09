@@ -1,8 +1,10 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
+import Subscription from '#models/subscription'
+import type { HasOne } from '@adonisjs/lucid/types/relations'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -21,6 +23,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column()
   declare email: string
+
+  @hasOne(() => Subscription)
+  declare subscription: HasOne<typeof Subscription>
 
   @column({ serializeAs: null })
   declare password: string | null

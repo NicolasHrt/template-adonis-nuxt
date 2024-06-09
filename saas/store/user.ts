@@ -10,7 +10,11 @@ export const useUserStore = defineStore({
       avatarUrl: null,
       email: null,
       createdAt: null,
-      updatedAt: null
+      updatedAt: null,
+      subscription: {
+        status: null,
+        customerPortal: null
+      }
     }
   }), actions: {
     async refresh() {

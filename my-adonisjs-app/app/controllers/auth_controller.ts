@@ -1,9 +1,16 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user'
+import Subscription from '#models/subscription'
+import SubscriptionService from '#services/subscription_service'
 
 export default class AuthController {
   async getUser({ auth }: HttpContext) {
-    return auth.user
+    const user = auth.user!
+    await user.load('subscription')
+
+    user.subscription.status = await SubscriptionService.checkSubscriptionValidity(user)
+
+    return user
   }
 
   async signOut({ response, auth }: HttpContext) {
@@ -54,6 +61,10 @@ export default class AuthController {
         name: googleUser.name,
         email: googleUser.email,
         avatarUrl: googleUser.avatarUrl,
+      })
+      await Subscription.create({
+        userId: newUser.id,
+        status: 'inactive',
       })
       await auth.use('web').login(newUser)
       return response.redirect('http://localhost:3000/app')

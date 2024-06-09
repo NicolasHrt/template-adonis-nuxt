@@ -10,6 +10,7 @@
 import router from '@adonisjs/core/services/router'
 
 import { middleware } from '#start/kernel'
+const SubscriptionsController = () => import('#controllers/subscriptions_controller')
 
 const AuthController = () => import('#controllers/auth_controller')
 
@@ -29,3 +30,5 @@ router
     router.delete('/delete', [AuthController, 'deleteUser']).use(middleware.auth())
   })
   .prefix('auth')
+
+router.post('/subscriptions/update', [SubscriptionsController, 'update'])

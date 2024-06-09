@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useUserStore } from '~/store/user'
+
 const links = [{
   label: 'Tab 1',
   icon: 'i-heroicons-book-open',
@@ -14,6 +16,7 @@ const links = [{
 }]
 
 const isPricingOpen = ref(false)
+const user = useUserStore()
 </script>
 
 <template>
@@ -28,19 +31,28 @@ const isPricingOpen = ref(false)
     </template>
 
     <template #right>
-      <UButton
-        label="Upgrade Now !"
-        @click="isPricingOpen=true"
-      />
+      <div v-if="user.data.subscription.status">
+        <UBadge
+          label="Pro"
+          color="black"
+          size="md"
+        />
+      </div>
+      <div v-else>
+        <UButton
+          label="Upgrade Now !"
+          @click="isPricingOpen=true"
+        />
+        <UModal
+          v-model="isPricingOpen"
+        >
+          <div class="p-4">
+            <PricingContent />
+          </div>
+        </UModal>
+      </div>
       <UColorModeButton />
       <AccountDropdown />
-      <UModal
-        v-model="isPricingOpen"
-      >
-        <div class="p-4">
-          <PricingContent />
-        </div>
-      </UModal>
     </template>
 
     <template #panel />

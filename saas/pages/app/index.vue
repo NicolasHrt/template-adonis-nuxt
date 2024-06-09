@@ -6,7 +6,7 @@ const user = useUserStore()
 
 <template>
   <div>
-    <p>{{ user.data.id }}</p>
+    {{ user.data.subscription.status }}
   </div>
 </template>
 

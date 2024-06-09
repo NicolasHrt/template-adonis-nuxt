@@ -5,14 +5,9 @@ const user = useUserStore()
 
 const items = [
   [{
-    label: 'User settings',
+    label: 'Account Settings',
     icon: 'i-heroicons-cog-8-tooth',
     to: '/app/settings'
-  },
-  {
-    label: 'Billing',
-    icon: 'i-heroicons-credit-card',
-    to: '/app/billing'
   }
   ], [{
     label: 'Sign out',

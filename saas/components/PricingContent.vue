@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { useUserStore } from '~/store/user'
+
 const { data: page } = await useAsyncData('pricing', () => queryContent('/pricing').findOne())
 
+const user = useUserStore()
 useSeoMeta({
   title: page.value.title,
   ogTitle: page.value.title,
@@ -13,6 +16,14 @@ defineOgImage({
   title: page.value.title,
   description: page.value.description
 })
+
+const getButtonLink = () => {
+  if (user.isLogged) {
+    return `https://nicolashrt.lemonsqueezy.com/buy/2d024c88-a97e-4c66-a549-9675edef3c7e?checkout[custom][user_id]=${user.data.id}`
+  } else {
+    return '/app'
+  }
+}
 
 const plan = {
   title: 'Starter',
@@ -29,7 +40,7 @@ const plan = {
   ],
   button: {
     label: 'Start free trial',
-    to: '/app/signup'
+    to: getButtonLink()
   }
 
 }
