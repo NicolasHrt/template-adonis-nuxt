@@ -18,6 +18,7 @@ export default await Env.create(new URL('../', import.meta.url), {
   HOST: Env.schema.string({ format: 'host' }),
   LOG_LEVEL: Env.schema.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace']),
   PG_URL: Env.schema.string.optional(),
+  DB_CONNECTION: Env.schema.enum(['sqlite', 'pg'] as const),
 
   /*
   |----------------------------------------------------------

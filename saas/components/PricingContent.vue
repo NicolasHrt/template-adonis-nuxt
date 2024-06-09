@@ -70,18 +70,6 @@ const isYearly = ref(false)
         />
       </div>
     </UContainer>
-
-    <ULandingSection>
-      <ULandingLogos>
-        <UIcon
-          v-for="icon in page.logos.icons"
-          :key="icon"
-          :name="icon"
-          class="w-12 h-12 flex-shrink-0 text-gray-500 dark:text-gray-400"
-        />
-      </ULandingLogos>
-    </ULandingSection>
-
     <ULandingSection
       :title="page.faq.title"
       :description="page.faq.description"

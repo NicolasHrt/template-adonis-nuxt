@@ -3,16 +3,16 @@ import { useUserStore } from '~/store/user'
 
 const links = [{
   label: 'Tab 1',
-  icon: 'i-heroicons-book-open',
-  to: '/getting-started'
+  icon: 'i-heroicons-book-open'
+
 }, {
   label: 'Tab 2',
-  icon: 'i-heroicons-square-3-stack-3d',
-  to: '/pro'
+  icon: 'i-heroicons-square-3-stack-3d'
+
 }, {
   label: 'Pricing',
-  icon: 'i-heroicons-rocket-launch',
-  to: '/releases'
+  icon: 'i-heroicons-rocket-launch'
+
 }]
 
 const isPricingOpen = ref(false)
@@ -22,12 +22,11 @@ const user = useUserStore()
 <template>
   <UHeader :links="links">
     <template #logo>
-      <NuxtLink
-        to="/app"
+      <h1
         class="text-2xl"
       >
         My Saas
-      </NuxtLink>
+      </h1>
     </template>
 
     <template #right>

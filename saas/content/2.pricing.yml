@@ -5,14 +5,7 @@ hero:
   title: A plan for every need
   description: Our plans are designed to meet the requirements of both beginners and players. Get the right plan that suits you.
   align: center
-logos:
-  title: Trusted by the world's best
-  icons:
-    - i-simple-icons-amazonaws
-    - i-simple-icons-heroku
-    - i-simple-icons-netlify
-    - i-simple-icons-vercel
-    - i-simple-icons-cloudflare
+
 faq:
   title: Frequently asked questions
   description: Culpa consectetur dolor pariatur commodo aliqua amet tempor nisi enim deserunt elit cillum.

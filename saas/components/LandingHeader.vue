@@ -16,7 +16,6 @@ const links = [{
 }]
 
 const user = useUserStore()
-await user.refresh()
 </script>
 
 <template>
