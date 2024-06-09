@@ -1,43 +1,48 @@
 <script setup lang="ts">
-const links = [
-  [{
-    label: 'Tab 1',
-    icon: 'i-heroicons-home',
-    to: '/app'
-  }, {
-    label: 'Horizontal Navigation',
-    icon: 'i-heroicons-chart-bar',
-    to: '/app/2'
-  }, {
-    label: 'Command Palette',
-    icon: 'i-heroicons-command-line',
-    to: '/app/3'
-  }]
-]
+const links = [{
+  label: 'Tab 1',
+  icon: 'i-heroicons-book-open',
+  to: '/getting-started'
+}, {
+  label: 'Tab 2',
+  icon: 'i-heroicons-square-3-stack-3d',
+  to: '/pro'
+}, {
+  label: 'Pricing',
+  icon: 'i-heroicons-rocket-launch',
+  to: '/releases'
+}]
+
+const isPricingOpen = ref(false)
 </script>
 
 <template>
-  <div>
-    <UContainer>
-      <div class="flex justify-between items-center py-4">
-        <NuxtLink
-          to="/app"
-          class="text-4xl font-bold"
-        >
-          My Saas
-        </NuxtLink>
-        <div class="flex items-center">
-          <UHorizontalNavigation
-            :links="links"
-          />
+  <UHeader :links="links">
+    <template #logo>
+      <NuxtLink
+        to="/app"
+        class="text-2xl"
+      >
+        My Saas
+      </NuxtLink>
+    </template>
 
-          <AccountDropdown />
+    <template #right>
+      <UButton
+        label="Upgrade Now !"
+        @click="isPricingOpen=true"
+      />
+      <UColorModeButton />
+      <AccountDropdown />
+      <UModal
+        v-model="isPricingOpen"
+      >
+        <div class="p-4">
+          <PricingContent />
         </div>
-      </div>
-    </UContainer>
-  </div>
+      </UModal>
+    </template>
+
+    <template #panel />
+  </UHeader>
 </template>
-
- <style scoped>
-
- </style>

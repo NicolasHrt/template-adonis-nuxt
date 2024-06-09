@@ -2,7 +2,7 @@
 import DeleteUserSection from '~/components/Settings/DeleteUserSection.vue'
 import { useUserStore } from '~/store/user'
 
-const userStore = useUserStore()
+const user = useUserStore()
 </script>
 
 <template>
@@ -12,14 +12,22 @@ const userStore = useUserStore()
     >
       <div class=" px-4 sm:px-6 py-6">
         <div class="flex items-center gap-6">
-          <span class="relative inline-flex items-center justify-center flex-shrink-0 rounded-full h-14 w-14 text-xl"><img
+          <span
+            class="relative inline-flex items-center justi
+          fy-center flex-shrink-0 rounded-full h-14 w-14 text-xl"
+          ><img
             class="rounded-full h-14 w-14 text-xl"
-            src="https://avatars.githubusercontent.com/u/72673830?v=4"
-          ><!----></span><div class="truncate">
-            <p class="font-semibold text-lg">
-              Nico
-            </p><p class="text-base u-text-gray-500 truncate">
-              @{{ userStore.data.username }} - {{ userStore.data.email }}
+            :src="user.data.avatarUrl"
+          ><!----></span>
+          <div class="truncate">
+            <p class="font-semibold text-lg flex items-center gap-2">
+              {{ user.data.name }} <UBadge
+                color="gray"
+                label="Prenium"
+              />
+            </p>
+            <p class="text-base text-gray-500 truncate">
+              {{ user.data.email }}
             </p>
           </div>
         </div>

@@ -28,6 +28,9 @@ export default defineAppConfig({
       hero: {
         wrapper: 'lg:py-24'
       }
+    },
+    icons: {
+      dynamic: true
     }
   }
 })

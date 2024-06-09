@@ -15,8 +15,8 @@ const links = [{
   to: '/blog'
 }]
 
-const userStore = useUserStore()
-await userStore.refresh()
+const user = useUserStore()
+await user.refresh()
 </script>
 
 <template>
@@ -33,7 +33,7 @@ await userStore.refresh()
     <template #right>
       <UColorModeButton />
       <UButton
-        v-if="userStore.isLogged"
+        v-if="user.isLogged"
         to="/app"
         label="Dashboard"
       />
@@ -43,16 +43,8 @@ await userStore.refresh()
       >
         <UButton
           label="Sign in"
-          color="gray"
-          to="/login"
-        />
-        <UButton
-          label="Sign up"
-          icon="i-heroicons-arrow-right-20-solid"
-          trailing
           color="black"
-          to="/signup"
-          class="hidden lg:flex"
+          to="/login"
         />
       </div>
     </template>

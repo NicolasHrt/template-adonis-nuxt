@@ -1,12 +1,8 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
-import { DbRememberMeTokensProvider } from '@adonisjs/auth/session'
-
+import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
-import Post from '#models/post'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -18,18 +14,16 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare id: number
 
   @column()
-  declare username: string | null
+  declare name: string | null
+
+  @column()
+  declare avatarUrl: string
 
   @column()
   declare email: string
 
   @column({ serializeAs: null })
-  declare password: string
-
-  static rememberMeTokens = DbRememberMeTokensProvider.forModel(User)
-
-  @hasMany(() => Post)
-  declare posts: HasMany<typeof Post>
+  declare password: string | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

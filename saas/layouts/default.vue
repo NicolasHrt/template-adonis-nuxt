@@ -8,12 +8,16 @@ userStore.refresh()
 
 <template>
   <div>
-    <AppHeader class="mb-10" />
-    <UMain>
-      <UContainer>
-        <slot />
-      </UContainer>
-    </UMain>
+    <div class="flex flex-col justify-between min-h-screen">
+      <div>
+        <AppHeader class="mb-10" />
+        <UContainer>
+          <slot />
+        </UContainer>
+      </div>
+
+      <Footer />
+    </div>
   </div>
 </template>
 

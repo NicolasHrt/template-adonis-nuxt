@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useUserStore } from '~/store/user'
 
-const userStore = useUserStore()
+const user = useUserStore()
 </script>
 
 <template>
   <div>
-    <p>{{ userStore.data.id }}</p>
+    <p>{{ user.data.id }}</p>
   </div>
 </template>
 

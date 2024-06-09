@@ -9,12 +9,12 @@ provide('navigation', navigation)
 
 <template>
   <div>
-    <LandingHeader />
-    <UMain>
+    <div class="flex flex-col justify-between min-h-screen">
+      <LandingHeader />
       <slot />
-    </UMain>
 
-    <LandingFooter />
+      <Footer />
+    </div>
 
     <ClientOnly>
       <LazyUContentSearch

@@ -3,7 +3,7 @@ import { useUserStore } from '~/store/user'
 
 const isDeleting = ref(false)
 
-const userStore = useUserStore()
+const user = useUserStore()
 </script>
 
 <template>
@@ -39,7 +39,7 @@ const userStore = useUserStore()
           <UButton
             color="red"
             label="Delete"
-            @click="userStore.deleteUser()"
+            @click="user.deleteUser()"
           />
           <UButton
             color="white"

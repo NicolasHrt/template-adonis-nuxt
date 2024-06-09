@@ -2,110 +2,36 @@
 import { useUserStore } from '~/store/user'
 
 definePageMeta({
-  layout: 'auth'
+  layout: 'landing'
 })
 
 useSeoMeta({
   title: 'Login'
 })
-const userStore = useUserStore()
-
-const state = reactive({
-  email: undefined,
-  password: undefined
-})
-
-const rememberMe = ref(false)
-
-const form = ref()
-const error = ref('')
-
-async function onSubmit() {
-  form.value.clear()
-  error.value = ''
-  try {
-    // Sign in
-    await userStore.signIn(state.email, state.password, rememberMe.value)
-    await navigateTo('/app')
-  } catch (err: any) {
-    if (err.response && err.response.status === 422) {
-      // Apply validation
-      form.value.setErrors(err.response._data.errors.map((err: any) => ({
-        message: err.message,
-        path: err.field
-      })))
-    } else {
-      // Invalid credentials
-      error.value = err.response._data.errors[0].message
-    }
-  }
-}
 </script>
 
 <!-- eslint-disable vue/multiline-html-element-content-newline -->
 <!-- eslint-disable vue/singleline-html-element-content-newline -->
 <template>
-  <UCard class="max-w-sm mx-auto w-full bg-white/75 dark:bg-white/5 backdrop-blur">
-    <div class="text-center mb-">
-      <p class="text-2xl text-gray-900 dark:text-white font-bold">Welcome back</p>
-      <p class="text-gray-500 dark:text-gray-400 mt-1">Don't have an account?
-        <NuxtLink
-          to="/signup"
-          class="text-primary font-medium"
-        >Sign up
-        </nuxtlink>
-      </p>
-    </div>
-    <UForm
-      ref="form"
-      class="max-w-lg mx-auto grid gap-4 mt-6"
-      :state="state"
-      @submit="onSubmit"
+  <UContainer>
+    <div
+      class="flex flex-col lg:grid lg:grid-cols-2 lg:items-center gap-16 sm:gap-y-24 sm:p-6 py-24 sm:py-32 px-6 lg:px-8"
     >
-      <UFormGroup
-        label="Email"
-        name="email"
-      >
-        <UInput v-model="state.email" />
-      </UFormGroup>
-
-      <UFormGroup
-        label="Password"
-        name="password"
-      >
-        <UInput
-          v-model="state.password"
-          type="password"
+      <div class="lg:order-last"><h2
+                                   class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl"
+                                 > <span class="text-primary">Sign in</span> or <span class="text-primary">Sign up</span>
+                                   to continue</h2><!-- v-if -->
+        <div class="mt-10 flex items-center gap-x-6" />
+        <UButton
+          icon="logos:google-icon"
+          color="gray"
+          label="with Google"
+          to="http://localhost:3333/auth/google/redirect"
         />
-      </UFormGroup>
-      <UCheckbox
-        v-model="rememberMe"
-        name="rememberMe"
-        label="Remember me"
-      />
-
-      <UAlert
-        v-if="error"
-        color="red"
-        icon="i-heroicons-information-circle-20-solid"
-        :title="error"
-      />
-      <UButton
-        block
-        type="submit"
-        class="mt-2"
-      >
-        Continue
-      </UButton>
-    </UForm>
-    <p class="text-sm text-gray-500 dark:text-gray-400 mt-6 text-center">By signing up, you agree to our
-      <NuxtLink
-        to="/"
-        class="text-primary font-medium"
-      >Terms
-        of Service
-      </NuxtLink>
-      .
-    </p>
-  </UCard>
+      </div>
+      <img
+        src="https://picsum.photos/640/360"
+        class="w-full rounded-md shadow-xl ring-1 ring-gray-300 dark:ring-gray-700"
+      ></div>
+  </UContainer>
 </template>

@@ -1,17 +1,23 @@
 <script setup lang="ts">
 import { useUserStore } from '~/store/user'
 
-const userStore = useUserStore()
+const user = useUserStore()
 
 const items = [
   [{
     label: 'User settings',
     icon: 'i-heroicons-cog-8-tooth',
     to: '/app/settings'
-  }], [{
+  },
+  {
+    label: 'Billing',
+    icon: 'i-heroicons-credit-card',
+    to: '/app/billing'
+  }
+  ], [{
     label: 'Sign out',
     icon: 'i-heroicons-arrow-left-on-rectangle',
-    click: () => userStore.logOut()
+    click: () => user.logOut()
 
   }]
 ]
@@ -23,10 +29,11 @@ const items = [
     :ui="{ item: { disabled: 'cursor-text select-text' } }"
     :popper="{ placement: 'bottom-start' }"
   >
-    <UButton
-      color="white"
-      label="Account"
-      trailing-icon="i-heroicons-chevron-down-20-solid"
+    <UAvatar
+      size="sm"
+      :src="user.data.avatarUrl"
+      alt="
+      Avatar"
     />
 
     <template #account="{ item }">
